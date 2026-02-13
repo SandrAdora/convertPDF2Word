@@ -1,0 +1,6 @@
+flask2
+flask_restful
+pdf2docx
+requests-html
+pymupdf
+python-dotenv

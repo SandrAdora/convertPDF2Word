@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+           <!-- Mobile + iPad responsive scaling -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📄 PDF | PDF Converter</title>
+    <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" 
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" >
+
+    <script src="/scripts.js" async></script>
+    <script  src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Spinner animation*/
+@keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+    .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 0.8s linear infinite;
+    }
+}
+@layer utilities {
+            /* Custom neon glow utility */
+            .neon-box {
+                box-shadow:
+                    0 0 5px #0ff,
+                    0 0 10px #0ff, 
+                    0 0 20px #0ff,
+                    0 0 40px #0ff;
+
+            }
+            .neon-box-nav {
+                box-shadow: 
+                      0 0 5px rgb(0, 42, 255),
+                      0 0 10px rgb(0, 42, 255),
+                      0 0 20px rgb(0, 42, 255),
+                      0 0 40px rgb(0, 42, 255),
+
+
+            }
+            @keyframes neonPulseBox {
+                from {
+                    box-shadow:
+                      0 0 5px #0ff,
+                      0 0 10px #0ff,
+                      0 0 40px #0ff;
+                }
+                to {
+                    box-shadow:
+                       0 0 10px rgb(0, 76, 255),
+                    0 0 20px rgb(0, 225, 255),
+                    0 0 30px rgb(0, 255, 225),
+                    0 0 60px #0ff;
+
+                }
+            }
+            
+            @keyframes neonPulseBoxNav{
+                from {
+                    box-shadow:
+                      0 0 5px rgb(0, 200, 255),
+                      0 0 10px rgb(0, 187, 255),
+                      0 0 40px  rgb(0, 255, 187);
+                }
+                to {
+                    box-shadow:
+                       0 0 10px rgb(0, 225, 255),
+                    0 0 20px rgb(0, 225, 255),
+                    0 0 30px rgb(0, 255, 225),
+                    0 0 60px #0ff;
+
+                }
+            }
+            .animate-neon-box {
+                animation: neonPulseBox 1.5s ease-in-out infinite alternate;
+            }
+            .animate-neon-box-nav {
+                animation: neonPulseBoxNav 1.5s ease-in-out infinite alternate;
+            }
+    
+        }   
+    </style>
+    </head>
+    <body class="min-h-screen flex flex-col bg-[url('https://www.pixelstalk.net/wp-content/uploads/2016/05/Amazing-HD-Black-Wallpapers.jpg')] {% block content %}{% endblock %}">
+        <header>
+            <nav class="w-full text-black font-bold bg-blue-600 backdrop-blur-md p-4 shadow-lg neon-box-nav animate-neon-box-nav">
+                <ul>
+                <li><span class="logo gap-8 "> ☰  PDF2DOCX</span></li>
+                <div class="text-sm text-white right-align">
+                <li>
+                    <span class="text-xl m:text-3xl block text-right">
+                        <a href="https://github.com/SandrAdora" class="gap-5">
+                            <i class="fa-brands fa-github">  </i>
+                        </a>   
+                        <a href="https://www.linkedin.com/in/sandra-edigin-08b5a124b">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    </span>
+                    </li>
+                    </div>
+                </ul>
+            </nav>
+        </header>
+        <main class="pb-32 flex flex-col flex-grow px-4 sm:px-8 sm:pt-28 items-center rounded-2xl flex-grow {% block main_content %}{% endblock %}">
+            <div class="neon-box animate-neon-box max-w-lg mx-auto p-8 bg-white/70 backdrop-blur-md rounded-2xl shadow-lg mt-24">
+                <h2 class="text-3xl font-black tracking-tight">📄PDF to Word Converter</h2>
+                <br>
+                <form action="/convert" method="POST" enctype="multipart/form-data" id="uploadForm" >
+                        <label for="myfile" class="block mb-2 font-medium">Upload Your PDF file:</label>
+                    
+                        <input type="file" id="myfile" name="myfile" multiple accept=".pdf" class="p-3 border border-gray-300 rounded-lg"><br><br>
+                        <input type="text" id="destPath" name="destPath" placeholder=" 🔄 Optional enter path location eg. c:/..." class="w-full p-3 border border-gray-300 rounded-lg"><br><br>
+                        <div class="flex justify-center gap-4">
+                            <button type="submit"  name="formBtn" class="font-semibold py-2 px-4 rounded flex items-center gap-2 transition disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-300 hover:bg-green-500 px-6 bg-blue-600 text-white rounded-lg p-3 border border-gray-300 rounded-lg">📄 Convert File</button>
+                            <button type="reset" id="formBtnCancel" name="formBtnCancel" class="transition-all duration-300 hover:bg-red-500 px-6 py-3 bg-gray-300 text-black rounded-lg p-3 border border-gray-300 rounded-lg">Cancel</button>
+                        </div>
+                </form>
+            </div>
+        </main>
+    <footer class="mt-auto w-full bg-white/70 backdrop-blur-md p-4 shadow-lg">
+        <p>&copy; 2026 Pdf to Docx Converter. All rights reserved. </p>
+    </footer>
+        <script src="js/scripts.js"></script>
+    </body>
+    
+</html>
