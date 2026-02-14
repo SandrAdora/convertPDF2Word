@@ -1,4 +1,4 @@
-flask2
+flask
 flask_restful
 pdf2docx
 requests-html
