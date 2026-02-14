@@ -1,5 +1,4 @@
 flask==3.1.2
-pdf2docx==1.2.0
 requests-html==0.10.0
 pymupdf==1.26.7
 python-dotenv==1.2.1
