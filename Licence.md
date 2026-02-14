@@ -7,7 +7,7 @@ of this software and associated documentation files (the “Software”), to use
 copy, modify, merge, publish, distribute, and sublicense the Software, subject
 to the following conditions:
 
-1. **Commercial Sale Restriction**Permission is granted to make copies of the Software; however, the Software
+1. **Commercial Sale Restriction** Permission is granted to make copies of the Software; however, the Software
    may **not** be sold, in whole or in part, without the explicit written
    permission of the developer, **Sandra Edigin**.Commercial sale is permitted only in direct collaboration with the developer.
 2. **Exclusive Commercial Rights**Unless a collaboration agreement is in place, **Sandra Edigin** retains the
