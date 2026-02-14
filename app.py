@@ -56,19 +56,30 @@ def convert():
     cv = Converter(temp_pdf_path)
     cv.convert(temp_docx_path, start=0, end=None)  
     cv.close()
-    return render_template(
-        'convert.html',
-        message="Conversion successful",
-        image_count=img_count,
-        time_used_for_conversion=time.process_time(),
-        download_file=temp_docx_path
-    )
+    if temp_docx_path:
+        return render_template(
+            'convert.html',
+            message=" ✅ Conversion successful",
+            image_count=img_count,
+            time_used_for_conversion=time.process_time(),
+            download_file=temp_docx_path
+        )
+    else:
+        return render_template(
+            'convert.html',
+            message="❌ Conversion Failure "
+        )
 
 @app.route("/download/<path:filename>")
 def download(filename):
-    return send_file(filename, as_attachment=True)
+    destpath = request.form.get("destPath")
+    if not destpath:
+        return send_file(filename, as_attachment=True)
+    else:
+        return send_file(os.path.join(destpath, filename), as_attachment=True)
 
-
+def refresh_page():
+    return request.args.get("download-clicked")
 
 @app.route("/", methods=['GET'])
 def home():

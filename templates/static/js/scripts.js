@@ -6,7 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const clickedButton = event.submitter.id;
 
-        if (clickedButton === "formBtnSubmit") {
+        if (clickedButton === "formBtn") {
+            // 1. hide main container 
+            document.getElementById('main-container').classList.add('hidden');
+            // 2. let the loading container appear 
+            document.getElementById('loading-container').classList.remove('hidden');
+            // 3. Transfer to request to sever 
             const formData = new FormData(form);
 
             fetch('/convert', {
