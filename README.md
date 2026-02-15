@@ -53,7 +53,7 @@ UX	Neon glow effects, blur backgrounds, loading states
 
 1. Clone the repository: 
 ```bash
-git clone [https://github.com/yourusername/pdf-to-word-converter.git](https://github.com/SandrAdora/convertPDF2Word.git)
+git clone [https://github.com/SandrAdora/convertPDF2Word.git](https://github.com/SandrAdora/convertPDF2Word.git)
 cd pdf-to-word-converter
 ``` 
 2. Install Dependencies:
