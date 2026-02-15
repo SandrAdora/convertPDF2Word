@@ -43,14 +43,22 @@ After a short delay, the app automatically returns to the homepage
 
 ## 🛠️ Tech Stack
 Layer	Technology
+
 * Backend	
    * Python, Flask
 Frontend	
+
 * HTML, 
 *TailwindCSS, 
 * FontAwesome
-Conversion	pdf2docx (or similar library)
-UX	Neon glow effects, blur backgrounds, loading states
+
+Conversion	libary: pymupdf 
+
+UX	
+
+*Neon glow effects, 
+*blur backgrounds, 
+*loading states
 
 ## Running the App Locally 
 
