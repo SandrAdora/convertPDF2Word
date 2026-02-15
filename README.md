@@ -44,17 +44,22 @@ After a short delay, the app automatically returns to the homepage
 ## 🛠️ Tech Stack
 Layer	Technology
 
-* Backend	
-   * Python, Flask
-Frontend	
+* Backend:
+	
+   * Python, 
+   * Flask
+
+Frontend:
 
 * HTML, 
 *TailwindCSS, 
 * FontAwesome
 
-Conversion	libary: pymupdf 
+Conversion	libary: 
 
-UX	
+* pymupdf 
+
+UX:
 
 *Neon glow effects, 
 *blur backgrounds, 
