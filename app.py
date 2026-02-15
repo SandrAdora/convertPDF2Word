@@ -33,17 +33,18 @@ def convert():
     # Secure filename
     filename = secure_filename(file_obj.filename)
     filename_docx, _ = os.path.splitext(filename)
-    # here convert for empty destination path
-        # if user does not specify a storage path 
-    # return file as download
+    
+    # if user does not specify a storage path 
+    # default path C-Downloadsfolder
     if not destpath:
         destpath = downloads_path
     
-    # Ensure destination folder exists
+    # Ensure destination folder exists if specified 
     if destpath and not os.path.exists(destpath):
         os.makedirs(destpath)
 
-    # Save uploaded PDF temporarily in search of images
+    # Save uploaded PDF and docx file temporarily 
+    
     temp_pdf_path = os.path.join(destpath, filename)
     file_obj.save(temp_pdf_path)
     filename_docx = filename_docx+'.docx'
