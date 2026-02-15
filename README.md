@@ -16,15 +16,14 @@ Built with Flask, Python, and a clean Tailwind‑styled UI, this tool focuses on
 
 ### 1. Upload your PDF
 
-    * Click the Upload Your PDF file field
-       * Select one or more .pdf files
-       * (Optional) Enter a custom output path
-       * Start the conversion
+* Click the Upload Your PDF file field
+* Select one or more .pdf files* (Optional) Enter a custom output path
+* Start the conversion
 
 ### 2. Click 📄 Convert File
 
-    * The app hides the form and shows a Loading… screen
-    * The server processes your file(s)
+* The app hides the form and shows a Loading… screen
+* The server processes your file(s)
 
 ### 3. View the conversion status
 
