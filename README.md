@@ -55,9 +55,10 @@ After a short delay, the app automatically returns to the homepage
 * TailwindCSS, 
 * FontAwesome
 
-### Conversion	libary: 
+### libaries: 
 
-* pymupdf 
+* pymupdf -> used to search images in pdf- files
+* pdf2docx -> used to convert pdf to docx
 
 ### UX:
 
