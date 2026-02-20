@@ -77,6 +77,7 @@ def download(filename):
     if not destpath:
         return send_file(filename, as_attachment=True)
     else:
+        filename = os.path.basename(filename)
         return send_file(os.path.join(destpath, filename), as_attachment=True)
 
 def refresh_page():
