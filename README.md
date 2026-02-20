@@ -70,7 +70,7 @@ After a short delay, the app automatically returns to the homepage
 
 1. Clone the repository: 
 ```bash
-git clone [https://github.com/SandrAdora/convertPDF2Word.git](https://github.com/SandrAdora/convertPDF2Word.git)
+git clone https://github.com/SandrAdora/convertPDF2Word.git
 cd pdf-to-word-converter
 ``` 
 2. Install Dependencies:
