@@ -8,7 +8,9 @@ import time
 
 app = Flask(__name__, template_folder='./templates/', static_folder='./templates/static/')
 downloads_path = Path.home() / "Downloads"
-
+alternative_path = Path.cwd() / "converted_files"
+if not alternative_path.exists():
+    os.makedirs(alternative_path)
 
 def find_images(pdf_path):
     """Check if PDF has images and return (count, has_images)"""
@@ -74,6 +76,10 @@ def convert():
 @app.route("/download/<path:filename>")
 def download(filename):
     destpath = request.form.get("destPath")
+    if not destpath and not os.path.exists(downloads_path):
+        destpath = alternative_path
+        filename = os.path.basename(filename)
+        return send_file(os.path.join(destpath, filename), as_attachment=True)  
     if not destpath:
         return send_file(filename, as_attachment=True)
     else:
