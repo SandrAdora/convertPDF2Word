@@ -1,5 +1,5 @@
 
-# 📄 convertPDF2Word — PDF → DOCX Converter (Flask + Python)
+# 📄 PDF → DOCX Converter (Flask + Python)
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)
