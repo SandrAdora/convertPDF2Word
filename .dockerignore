@@ -1,0 +1,40 @@
+# --- Python build artifacts ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Virtual environments ---
+venv/
+env/
+.venv/
+.env
+
+# --- OS / Editor files ---
+.DS_Store
+Thumbs.db
+
+# --- Git ---
+.git/
+.gitignore
+
+# --- Local output folders ---
+converted_files/
+downloads/
+*.docx
+*.pdf
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+
+# --- Docker ---
+Dockerfile
+docker-compose.yml
+
+# --- Node / Frontend (if ever added) ---
+node_modules/
+
+# --- Cache ---
+*.log
+.cache/

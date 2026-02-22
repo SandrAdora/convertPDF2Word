@@ -6,25 +6,32 @@ import fitz  # PyMuPDF
 from pathlib import Path
 import time
 
-app = Flask(__name__, template_folder='./templates/', static_folder='./templates/static/')
-downloads_path = Path.home() / "Downloads"
-alternative_path = Path.cwd() / "converted_files"
-if not alternative_path.exists():
-    os.makedirs(alternative_path)
+# ---------------------------------------------------------
+# 1. Base directories
+# ---------------------------------------------------------
+BASEDIR = Path(__file__).resolve().parent
+OUTPUTDIR = BASEDIR / "converted_files"
+OUTPUTDIR.mkdir(exist_ok=True)
 
+app = Flask(__name__, template_folder='./templates/', static_folder='./templates/static/')
+
+# ---------------------------------------------------------
+# 2. Helper: detect images in PDF
+# ---------------------------------------------------------
 def find_images(pdf_path):
-    """Check if PDF has images and return (count, has_images)"""
     doc = fitz.open(pdf_path)
     image_count = 0
     for page in doc:
         images = page.get_images(full=True)
         image_count += len(images)
     return image_count, image_count > 0
-    
+
+# ---------------------------------------------------------
+# 3. Convert route
+# ---------------------------------------------------------
 @app.route('/convert', methods=['POST'])
 def convert():
     file_obj = request.files.get("myfile")
-    destpath = request.form.get("destPath")
 
     if not file_obj:
         return jsonify({"Error": "No file uploaded"}), 400
@@ -34,64 +41,57 @@ def convert():
 
     # Secure filename
     filename = secure_filename(file_obj.filename)
-    filename_docx, _ = os.path.splitext(filename)
-    
-    # if user does not specify a storage path 
-    # default path C-Downloadsfolder
-    if not destpath:
-        destpath = downloads_path
-    
-    # Ensure destination folder exists if specified 
-    if destpath and not os.path.exists(destpath):
-        os.makedirs(destpath)
+    filename_docx = Path(filename).stem + ".docx"
 
-    # Save uploaded PDF and docx file temporarily 
-    
-    temp_pdf_path = os.path.join(destpath, filename)
+    # Always save inside OUTPUTDIR (which may be mounted to host Downloads)
+    temp_pdf_path = OUTPUTDIR / filename
+    temp_docx_path = OUTPUTDIR / filename_docx
+
+    # Save uploaded PDF
     file_obj.save(temp_pdf_path)
-    filename_docx = filename_docx+'.docx'
-    temp_docx_path = os.path.join(destpath, filename_docx)
 
     # Check for images
     img_count, _ = find_images(temp_pdf_path)
 
     # Convert PDF → DOCX
-    cv = Converter(temp_pdf_path)
-    cv.convert(temp_docx_path, start=0, end=None)  
+    cv = Converter(str(temp_pdf_path))
+    cv.convert(str(temp_docx_path), start=0, end=None)
     cv.close()
-    if temp_docx_path:
+    if not os.path.exists(temp_docx_path):
         return render_template(
             'convert.html',
-            message=" ✅ Conversion successful",
+            message="❌ Conversion failed",)
+    else:
+        return render_template(
+            'convert.html',
+            message="✅ Conversion successful",
             image_count=img_count,
             time_used_for_conversion=time.process_time(),
-            download_file=temp_docx_path
-        )
-    else:
-        return render_template(
-            'convert.html',
-            message="❌ Conversion Failure "
+            download_file=temp_docx_path.name  # only filename
         )
 
+# ---------------------------------------------------------
+# 4. Download route
+# ---------------------------------------------------------
 @app.route("/download/<path:filename>")
 def download(filename):
-    destpath = request.form.get("destPath")
-    if not destpath and not os.path.exists(downloads_path):
-        destpath = alternative_path
-        filename = os.path.basename(filename)
-        return send_file(os.path.join(destpath, filename), as_attachment=True)  
-    if not destpath:
-        return send_file(filename, as_attachment=True)
-    else:
-        filename = os.path.basename(filename)
-        return send_file(os.path.join(destpath, filename), as_attachment=True)
+    filename = os.path.basename(filename)
+    file_path = OUTPUTDIR / filename
 
-def refresh_page():
-    return request.args.get("download-clicked")
+    if not file_path.exists():
+        return jsonify({"error": "File not found"}), 404
 
+    return send_file(file_path, as_attachment=True)
+
+# ---------------------------------------------------------
+# 5. Home route
+# ---------------------------------------------------------
 @app.route("/", methods=['GET'])
 def home():
-    """This is the root"""
     return render_template('index.html')
+
+# ---------------------------------------------------------
+# 6. Run app
+# ---------------------------------------------------------
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)
