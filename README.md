@@ -1,9 +1,31 @@
-# 📄 PDF to Word Converter
 
-A lightweight, fast, and user‑friendly web application that converts PDF files into editable Word (.docx) documents.
-Built with Flask, Python, and a clean Tailwind‑styled UI, this tool focuses on simplicity, speed, and clarity.
+# 📄 convertPDF2Word — PDF → DOCX Converter (Flask + Python)
 
-## Features
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-App-000000?logo=flask&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Active-success)
+![Stars](https://img.shields.io/github/stars/SandrAdora/convertPDF2Word?style=social)
+![Forks](https://img.shields.io/github/forks/SandrAdora/convertPDF2Word?style=social)
+
+A lightweight web application that converts PDF files into editable Word documents (`.docx`).  
+Built with **Flask**, **PyMuPDF**, and **pdf2docx**, and fully containerized with **Docker** for easy deployment.
+
+---
+
+## Key Features
+
+- Convert any PDF into a `.docx` file  
+- Detects number of images inside the PDF  
+- Clean web interface (HTML templates included)  
+- Works locally or inside Docker  
+- Supports saving output directly into the user’s **Downloads** folder  
+- Fast, reliable conversion using `pdf2docx` and `PyMuPDF`
+
+---
+
+## 🚀 App Features
 
 * Upload one or multiple PDF files
 * Optional custom output path
