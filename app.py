@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, send_file, render_template
 import os
+import tempfile
 from pdf2docx import Converter
 from werkzeug.utils import secure_filename
 import fitz  # PyMuPDF
@@ -9,8 +10,7 @@ import time
 # ---------------------------------------------------------
 # 1. Base directories
 # ---------------------------------------------------------
-BASEDIR = Path(__file__).resolve().parent
-OUTPUTDIR = BASEDIR / "converted_files"
+OUTPUTDIR = Path(tempfile.gettempdir()) / "convertpdf2word"
 OUTPUTDIR.mkdir(exist_ok=True)
 
 app = Flask(__name__, template_folder='./templates/', static_folder='./templates/static/')
