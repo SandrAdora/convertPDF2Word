@@ -1,142 +1,165 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-           <!-- Mobile + iPad responsive scaling -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📄 PDF | PDF Converter</title>
-   
+    <title>📄 PDF to Word Converter</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" 
-    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" >
-
-    <script  src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Spinner animation*/
-        @keyframes spin {
-            to {
-                transform: rotate(360deg)
-            }
-            .spinner {
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top: 3px solid white;
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-            animation: spin 0.8s linear infinite;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0a0f;
+            background-image: radial-gradient(ellipse at top, #0d1b2a 0%, #0a0a0f 70%);
+            min-height: 100vh;
         }
-    }
-    @layer utilities {
-            /* Custom neon glow utility */
-            .neon-box {
-                box-shadow:
-                    0 0 5px #0ff,
-                    0 0 10px #0ff, 
-                    0 0 20px #0ff,
-                    0 0 40px #0ff;
 
-            }
-            .neon-box-nav {
-                box-shadow: 
-                    0 0 5px rgb(0, 42, 255),
-                    0 0 10px rgb(0, 42, 255),
-                    0 0 20px rgb(0, 42, 255),
-                    0 0 40px rgb(0, 42, 255),
-                    }
-            @keyframes neonPulseBox {
-                from {
-                    box-shadow:
-                    0 0 5px #0ff,
-                    0 0 10px #0ff,
-                    0 0 40px #0ff;
-                    }
-                    to {
-                        box-shadow:
-                        0 0 10px rgb(0, 76, 255),
-                        0 0 20px rgb(0, 225, 255),
-                        0 0 30px rgb(0, 255, 225),
-                        0 0 60px #0ff;
-                        
-                    }
-                }
-                
-                @keyframes neonPulseBoxNav{
-                    from {
-                        box-shadow:
-                        0 0 5px rgb(0, 200, 255),
-                        0 0 10px rgb(0, 187, 255),
-                        0 0 40px  rgb(0, 255, 187);
-                    }
-                    to {
-                    box-shadow:
-                    0 0 10px rgb(0, 225, 255),
-                    0 0 20px rgb(0, 225, 255),
-                    0 0 30px rgb(0, 255, 225),
-                    0 0 60px #0ff;
-                    
-                }
-            }
-            .animate-neon-box {
-                animation: neonPulseBox 1.5s ease-in-out infinite alternate;
-            }
-            .animate-neon-box-nav {
-                animation: neonPulseBoxNav 1.5s ease-in-out infinite alternate;
-            }
-    
-        }   
+        .neon-box {
+            box-shadow: 0 0 5px #0ff, 0 0 15px #0ff, 0 0 30px rgba(0,255,255,0.3);
+            animation: neonPulse 2s ease-in-out infinite alternate;
+        }
+
+        .neon-nav {
+            box-shadow: 0 0 8px rgba(0,100,255,0.8), 0 0 20px rgba(0,100,255,0.4);
+            animation: neonNavPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonPulse {
+            from { box-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px rgba(0,255,255,0.3); }
+            to   { box-shadow: 0 0 10px #0ff, 0 0 25px #0ff, 0 0 45px rgba(0,200,255,0.5); }
+        }
+
+        @keyframes neonNavPulse {
+            from { box-shadow: 0 0 5px rgba(0,100,255,0.8), 0 0 15px rgba(0,100,255,0.4); }
+            to   { box-shadow: 0 0 10px rgba(0,150,255,1), 0 0 30px rgba(0,150,255,0.6); }
+        }
+
+        .file-input-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: 2px dashed rgba(0,255,255,0.4);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: border-color 0.3s, background 0.3s;
+            background: rgba(0,255,255,0.03);
+            color: #ccc;
+            width: 100%;
+        }
+
+        .file-input-label:hover, .file-input-label:focus-within {
+            border-color: #0ff;
+            background: rgba(0,255,255,0.07);
+            color: #fff;
+        }
+
+        #myfile {
+            display: none;
+        }
+
+        #file-name {
+            font-size: 0.85rem;
+            color: #0ff;
+            margin-top: 0.5rem;
+            text-align: center;
+            min-height: 1.2rem;
+            word-break: break-all;
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col bg-[url('https://www.pixelstalk.net/wp-content/uploads/2016/05/Amazing-HD-Black-Wallpapers.jpg')] {% block content %}{% endblock %}">
-    
+
+<body class="flex flex-col min-h-screen">
+
+    <!-- Nav -->
     <header>
-        <nav class="w-full text-black font-bold bg-blue-600 backdrop-blur-md p-4 shadow-lg neon-box-nav animate-neon-box-nav">
-            <ul>
-                <li><span class="logo gap-8 "> ☰  PDF2DOCX</span></li>
-                <div class="text-sm text-white right-align">
-                    <li>
-                        <span class="text-xl m:text-3xl block text-right">
-                        <a href="https://github.com/SandrAdora" class="gap-5">
-                            <i class="fa-brands fa-github">  </i>
-                        </a>   
-                        <a href="https://www.linkedin.com/in/sandra-edigin-08b5a124b">
-                            <i class="fa-brands fa-linkedin-in"></i>
-                        </a>
-                    </span>
-                </li>
+        <nav class="w-full bg-blue-700 neon-nav px-4 py-3 flex items-center justify-between">
+            <span class="text-white font-bold text-lg tracking-wide">☰ PDF2DOCX</span>
+            <div class="flex gap-4 text-xl text-white">
+                <a href="https://github.com/SandrAdora" aria-label="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/sandra-edigin-08b5a124b" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
             </div>
-                </ul>
-            </nav>
-        </header>
-        <main class="pb-32 flex flex-col flex-grow px-4 sm:px-8 sm:pt-28 items-center rounded-2xl flex-grow {% block main_content %}{% endblock %}">
-            <!--Main Container -->
-            <div class="neon-box animate-neon-box max-w-lg mx-auto p-8 bg-white/70 backdrop-blur-md rounded-2xl shadow-lg mt-24" id="main-container">
-                <h2 class="text-3xl font-black tracking-tight">📄PDF to Word Converter</h2>
-                <br>
-                <form action="/convert" method="POST" enctype="multipart/form-data" id="uploadForm" >
-                    <label for="myfile" class="block mb-2 font-medium">Upload Your PDF file:</label>
-                    
-                    <input type="file" id="myfile" name="myfile" multiple accept=".pdf" class="p-3 border border-gray-300 rounded-lg"><br><br>
-                    <input type="text" id="destPath" name="destPath" placeholder=" 🔄 Optional: enter path to store file eg. c:/..." class="w-full p-3 border border-gray-300 rounded-lg"><br><br>
-                    <div class="flex justify-center gap-4">
-                        <button type="submit"  id="formBtn" name="formBtn" class="font-semibold py-2 px-4 rounded flex items-center gap-2 transition disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-300 hover:bg-green-500 px-6 bg-blue-600 text-white rounded-lg p-3 border border-gray-300 rounded-lg">📄 Convert File</button>
-                        <button type="reset"  name="formBtnCancel" class="transition-all duration-300 hover:bg-red-500 px-6 py-3 bg-gray-300 text-black rounded-lg p-3 border border-gray-300 rounded-lg">Cancel</button>
-                    </div>
-                </form>
-            </div>
-            <!--Loading Container-->
-            <div id="loading-container" class="hidden px-4 sm:px-8 items-center backdrop-blur-md rounded-lg mt-34">
-                <i class="fa-duotone fa-solid fa-bars-progress fa-flip-both fa-5x animate-spin bg-blue-800 neon-box animate-neon-box flex justify-center"></i>
+        </nav>
+    </header>
 
-                <h1 class="mt-15 font-bold text-4xl flex justify-center backdrop-blur-md rounded-lg  neon-box animate-neon-box">...Loading Pages....</h1>
-            </div>
-        </main>
-    <footer class="mt-auto w-full bg-white/70 backdrop-blur-md p-4 shadow-lg">
-        <p>&copy; 2026 Pdf to Docx Converter. All rights reserved. </p>
+    <!-- Main -->
+    <main class="flex-grow flex flex-col items-center justify-center px-4 py-10">
+
+        <!-- Upload card -->
+        <div class="neon-box w-full max-w-md bg-white/5 backdrop-blur-md rounded-2xl shadow-lg p-6 sm:p-8" id="main-container">
+            <h1 class="text-2xl sm:text-3xl font-bold text-white text-center mb-6">
+                📄 PDF to Word Converter
+            </h1>
+
+            <form action="/convert" method="POST" enctype="multipart/form-data" id="uploadForm">
+
+                <!-- File picker -->
+                <label for="myfile" class="file-input-label">
+                    <i class="fa-solid fa-upload"></i>
+                    <span>Tap to choose a PDF</span>
+                </label>
+                <input type="file" id="myfile" name="myfile" accept=".pdf">
+                <p id="file-name"></p>
+
+                <!-- Optional path -->
+                <input type="text" id="destPath" name="destPath"
+                    placeholder="Optional: output path (e.g. C:/Downloads)"
+                    class="mt-4 w-full p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 text-sm focus:outline-none focus:border-cyan-400">
+
+                <!-- Buttons -->
+                <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                    <button type="submit" id="formBtn" name="formBtn"
+                        class="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-green-500 active:scale-95 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 text-base">
+                        <i class="fa-solid fa-file-word"></i> Convert File
+                    </button>
+                    <button type="reset" name="formBtnCancel"
+                        class="flex-1 bg-gray-600 hover:bg-red-500 active:scale-95 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 text-base">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Loading -->
+        <div id="loading-container" class="hidden flex-col items-center gap-6 mt-10">
+            <i class="fa-solid fa-arrows-rotate fa-spin text-cyan-400" style="font-size:4rem;"></i>
+            <h2 class="text-white text-2xl font-bold neon-box px-6 py-3 rounded-xl">Converting...</h2>
+        </div>
+
+    </main>
+
+    <footer class="w-full bg-white/5 backdrop-blur-md text-center text-gray-400 text-sm py-4 px-4">
+        &copy; 2026 PDF to DOCX Converter. All rights reserved.
     </footer>
-    
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-</body>
 
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+    <script>
+        // Show selected filename
+        document.getElementById('myfile').addEventListener('change', function () {
+            const label = document.querySelector('.file-input-label span');
+            const nameEl = document.getElementById('file-name');
+            if (this.files.length > 0) {
+                label.textContent = 'File selected';
+                nameEl.textContent = this.files[0].name;
+            } else {
+                label.textContent = 'Tap to choose a PDF';
+                nameEl.textContent = '';
+            }
+        });
+    </script>
+
+    {% block content %}{% endblock %}
+</body>
 </html>

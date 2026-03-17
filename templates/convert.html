@@ -1,38 +1,71 @@
 {% extends 'index.html' %}
 {% block content %}
 
-<div class="flex justify-center neon-box animate-neon-box max-w-lg mx-auto p-8 bg-white/70 backdrop-blur-md rounded-2xl shadow-lg mt-24">
-    <h2 class="text-3xl font-bold tracking-tight text-white flex justify-center mt-6">Conversion Status</h2>
-    <!---Success Block -->
-    <div id="conversion-success" class="flex justify-center neon-box animate-neon-box  bg-blue-600 backdrop-blur-md rounded-2xl shadow-lg mt-10">
-        <h2 class="text-white  font-bold font-black">
-            {{ message }}<br>
-            Images found: {{ image_count }}<br>
-            Time Used for converting: {{ time_used_for_conversion }} ms<br>
-        </h2>
-    
-        <button id="download-clicked"  class="px-6 gap-6"><a href="/download/{{ download_file }}" 
-            class=" bg-blue-600 hover:bg-green-500 text-white 
-            font-semibold py-2 px-4 rounded-lg shadow-md transition">
-            <i class="fa-solid fa-download" style="#ffffff"> download file</i></a></button>
-    </div>
-    <!---Failure Block-->
-    <div id="conversion-failed" class="hidden">
-        <h1>
-            {{ message }}
-        </h1>
+<style>
+    .result-card {
+        animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Hide the upload card, show result inline
+    const mainContainer = document.getElementById('main-container');
+    if (mainContainer) mainContainer.classList.add('hidden');
+
+    const result = document.getElementById('result-card');
+    if (result) result.classList.remove('hidden');
+
+    // Redirect home after download click
+    const dlBtn = document.getElementById('download-btn');
+    if (dlBtn) {
+        dlBtn.addEventListener('click', function () {
+            setTimeout(() => { window.location.href = "/"; }, 700);
+        });
+    }
+
+    // Show failure block if conversion failed
+    const msg = "{{ message }}";
+    if (msg.includes("❌")) {
+        document.getElementById('success-block').classList.add('hidden');
+        document.getElementById('fail-block').classList.remove('hidden');
+    }
+});
+</script>
+
+<!-- Result card -->
+<div id="result-card" class="hidden result-card w-full max-w-md mt-6 px-4">
+    <div class="neon-box bg-white/5 backdrop-blur-md rounded-2xl p-6 sm:p-8 text-white">
+
+        <h2 class="text-2xl font-bold text-center mb-6">Conversion Status</h2>
+
+        <!-- Success -->
+        <div id="success-block">
+            <div class="bg-blue-700/60 rounded-xl p-4 mb-6 space-y-2 text-sm sm:text-base">
+                <p class="text-lg font-bold text-center">{{ message }}</p>
+                <p><span class="text-cyan-300 font-semibold">Images found:</span> {{ image_count }}</p>
+                <p><span class="text-cyan-300 font-semibold">Time:</span> {{ time_used_for_conversion }} ms</p>
+            </div>
+
+            <a id="download-btn" href="/download/{{ download_file }}"
+                class="flex items-center justify-center gap-3 w-full bg-blue-600 hover:bg-green-500 active:scale-95 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 text-base">
+                <i class="fa-solid fa-download"></i> Download File
+            </a>
+        </div>
+
+        <!-- Failure -->
+        <div id="fail-block" class="hidden text-center">
+            <p class="text-2xl font-bold text-red-400 mb-4">{{ message }}</p>
+            <a href="/" class="inline-block bg-gray-600 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200">
+                Try Again
+            </a>
+        </div>
+
     </div>
 </div>
-<script>
-    document.getElementById("download-clicked").addEventListener('click', function isClicked(){
-        setTimeout(()=> {
-            // refresh page after 700 ms
-            window.location.href="/";
-        }, 700);
-    });
-    if ("{{ message }}" === "❌ Conversion Failure"){
-        document.getElementById('conversion-failed').classList.remove('hidden');
-        document.getElementById('conversion-success').classList.add('hidden');
-    }
-</script>
+
 {% endblock %}
