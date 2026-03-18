@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div id="success-block">
             <div class="bg-blue-700/60 rounded-xl p-4 mb-6 space-y-2 text-sm sm:text-base">
                 <p class="text-lg font-bold text-center">{{ message }}</p>
+                <p><span class="text-cyan-300 font-semibold">Method:</span> {{ "OCR (scanned PDF)" if method == "OCR" else "Direct conversion" }}</p>
                 <p><span class="text-cyan-300 font-semibold">Images found:</span> {{ image_count }}</p>
                 <p><span class="text-cyan-300 font-semibold">Time:</span> {{ time_used_for_conversion }} ms</p>
             </div>

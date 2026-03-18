@@ -18,11 +18,12 @@ Built with **Flask**, **PyMuPDF**, and **pdf2docx**, and fully containerized wit
 
 ## Key Features
 
-- Convert any PDF into a `.docx` file  
-- Detects number of images inside the PDF  
-- Clean web interface (HTML templates included)  
-- Works locally or inside Docker  
-- Supports saving output directly into the user’s **Downloads** folder  
+- Convert any PDF into a `.docx` file
+- **Automatic OCR** for scanned / image-based PDFs (powered by Tesseract)
+- Detects number of images inside the PDF
+- Clean web interface (HTML templates included)
+- Works locally or inside Docker
+- Supports saving output directly into the user’s **Downloads** folder
 - Fast, reliable conversion using `pdf2docx` and `PyMuPDF`
 
 ---
@@ -79,10 +80,13 @@ After a short delay, the app automatically returns to the homepage
 * TailwindCSS, 
 * FontAwesome
 
-### libaries: 
+### Libraries:
 
-* pymupdf -> used to search images in pdf- files
-* pdf2docx -> used to convert pdf to docx
+* pymupdf -> used to search images in pdf files and render pages for OCR
+* pdf2docx -> used to convert text-based PDFs to docx
+* pytesseract -> OCR engine for scanned / image-based PDFs
+* Pillow -> image processing for OCR pipeline
+* python-docx -> builds the Word document from OCR output
 
 ### UX:
 
@@ -123,11 +127,12 @@ Download example.docx
 Automatically return to the homepage
 
 ## 🛡️ Notes & Limitations
-Conversion quality depends on the PDF structure
 
-Very large PDFs may take longer
-
-Complex layouts (tables, forms) may require manual cleanup
+- Conversion quality depends on the PDF structure
+- Very large PDFs may take longer
+- Complex layouts (tables, forms) may require manual cleanup
+- OCR quality depends on scan resolution — blurry or low-quality scans may produce inaccurate text
+- OCR supports English and German out of the box
 
 
 # Application: PDF To DOCX Converter 
