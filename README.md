@@ -28,7 +28,7 @@ Built with **Flask**, **PyMuPDF**, and **pdf2docx**, and fully containerized wit
 
 ---
 
-## 🚀 App Features
+##  App Features
 
 * Upload one or multiple PDF files
 * Optional custom output path
@@ -66,7 +66,7 @@ Built with **Flask**, **PyMuPDF**, and **pdf2docx**, and fully containerized wit
 After a short delay, the app automatically returns to the homepage
 
 
-## 🛠️ Tech Stack
+##  Tech Stack
 ## Layer Technology
 
 * Backend:
@@ -114,7 +114,7 @@ python app.py
 localhost:5000
 ```
 
-## 🧪 Example Workflow
+##  Example Workflow
 
 Upload example.pdf
 
@@ -126,7 +126,7 @@ Download example.docx
 
 Automatically return to the homepage
 
-## 🛡️ Notes & Limitations
+##  Notes & Limitations
 
 - Conversion quality depends on the PDF structure
 - Very large PDFs may take longer
