@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1b2a"/>
+      <stop offset="100%" style="stop-color:#0a0a0f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="64" height="64" rx="10" fill="url(#bgGrad)"/>
+
+  <!-- PDF document (left) -->
+  <rect x="4" y="10" width="22" height="28" rx="2" fill="#1a2a3a" stroke="#00cfff" stroke-width="1.2" filter="url(#glow)"/>
+  <rect x="4" y="10" width="22" height="7" rx="2" fill="#1e4d8c"/>
+  <text x="15" y="20" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="5.5" fill="#00cfff" filter="url(#glow)">PDF</text>
+  <line x1="8" y1="25" x2="22" y2="25" stroke="#00cfff" stroke-width="1" opacity="0.5"/>
+  <line x1="8" y1="29" x2="22" y2="29" stroke="#00cfff" stroke-width="1" opacity="0.5"/>
+  <line x1="8" y1="33" x2="19" y2="33" stroke="#00cfff" stroke-width="1" opacity="0.5"/>
+
+  <!-- Arrow -->
+  <g filter="url(#glow)">
+    <line x1="28" y1="24" x2="37" y2="24" stroke="#00cfff" stroke-width="2" stroke-linecap="round"/>
+    <polyline points="34,20 38,24 34,28" fill="none" stroke="#00cfff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- DOCX document (right) -->
+  <rect x="38" y="10" width="22" height="28" rx="2" fill="#1a2a3a" stroke="#2563eb" stroke-width="1.2" filter="url(#glow)"/>
+  <rect x="38" y="10" width="22" height="7" rx="2" fill="#1e4d8c"/>
+  <text x="49" y="20" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="4.5" fill="#60a5fa" filter="url(#glow)">DOCX</text>
+  <line x1="42" y1="25" x2="56" y2="25" stroke="#60a5fa" stroke-width="1" opacity="0.5"/>
+  <line x1="42" y1="29" x2="56" y2="29" stroke="#60a5fa" stroke-width="1" opacity="0.5"/>
+  <line x1="42" y1="33" x2="53" y2="33" stroke="#60a5fa" stroke-width="1" opacity="0.5"/>
+
+  <!-- Bottom label -->
+  <text x="32" y="54" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="6" fill="#00cfff" filter="url(#glow)">PDF2DOCX</text>
+</svg>
