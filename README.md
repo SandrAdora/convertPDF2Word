@@ -12,7 +12,7 @@
 A lightweight web application that converts PDF files into editable Word documents (`.docx`).
 Built with **Flask**, **PyMuPDF**, and **pdf2docx**, and fully containerized with **Docker** for easy deployment.
 
-🌐 **Live Demo:** [https://convertpdf2word-2.onrender.com/](https://convertpdf2word-2.onrender.com/)
+🌐 **Live Demo:** [Convert pdf2word ](https://convertpdf2word-2.onrender.com/)
 
 ---
 
@@ -28,7 +28,7 @@ Built with **Flask**, **PyMuPDF**, and **pdf2docx**, and fully containerized wit
 
 ---
 
-## 🚀 App Features
+##  App Features
 
 * Upload one or multiple PDF files
 * Optional custom output path
@@ -66,7 +66,7 @@ Built with **Flask**, **PyMuPDF**, and **pdf2docx**, and fully containerized wit
 After a short delay, the app automatically returns to the homepage
 
 
-## 🛠️ Tech Stack
+##  Tech Stack
 ## Layer Technology
 
 * Backend:
@@ -114,7 +114,7 @@ python app.py
 localhost:5000
 ```
 
-## 🧪 Example Workflow
+##  Example Workflow
 
 Upload example.pdf
 
@@ -126,7 +126,7 @@ Download example.docx
 
 Automatically return to the homepage
 
-## 🛡️ Notes & Limitations
+##  Notes & Limitations
 
 - Conversion quality depends on the PDF structure
 - Very large PDFs may take longer
@@ -137,5 +137,5 @@ Automatically return to the homepage
 
 # Application: PDF To DOCX Converter 
 
-<img width="1914" height="938" alt="2026-02-15" src="https://github.com/user-attachments/assets/eb5a974f-33b2-48d4-bfe3-4702aa61fbc1" />
+<img width="1842" height="1002" alt="Screenshot 2026-03-28 105138" src="https://github.com/user-attachments/assets/03ef865c-8e4c-4c23-8f03-7128a95a45f4" />
 
